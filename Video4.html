@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>انتخاب فصل</title>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Vazirmatn', sans-serif;
+    }
+    body {
+      background: linear-gradient(270deg, #f8bbd0, #f48fb1, #f06292, #ec407a);
+      background-size: 800% 800%;
+      animation: backgroundShift 20s ease infinite;
+      color: #333;
+      overflow-x: hidden;
+      text-align: center;
+      padding: 40px 10px;
+    }
+    @keyframes backgroundShift {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+    h1 {
+      color: white;
+      margin-bottom: 30px;
+      font-size: 28px;
+      text-shadow: 1px 1px 4px #00000060;
+    }
+    .chapter-btn {
+      background-color: #e91e63;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin: 10px;
+      transition: background 0.3s, transform 0.2s;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .chapter-btn:hover {
+      background-color: #c2185b;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <h1>فصل را انتخاب کنید</h1>
+  <div>
+    <button class="chapter-btn" onclick="goToChapter(1)">فصل ۱</button>
+    <button class="chapter-btn" onclick="goToChapter(2)">فصل ۲</button>
+    <button class="chapter-btn" onclick="goToChapter(3)">فصل ۳</button>
+    <button class="chapter-btn" onclick="goToChapter(4)">فصل ۴</button>
+    <button class="chapter-btn" onclick="goToChapter(5)">فصل ۵</button>
+    <button class="chapter-btn" onclick="goToChapter(6)">فصل ۶</button>
+    <button class="chapter-btn" onclick="goToChapter(7)">فصل ۷</button>
+    <button class="chapter-btn" onclick="goToChapter(8)">فصل ۸</button>
+    <button class="chapter-btn" onclick="goToChapter(9)">فصل ۹</button>
+  </div>
+
+  <script>
+    function goToChapter(number) {
+      // This will redirect to files like chapter1.html, chapter2.html, etc.
+      window.location.href = `chapter${number}.html`;
+    }
+  </script>
+</body>
+</html>
