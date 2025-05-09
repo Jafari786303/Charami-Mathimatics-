@@ -63,8 +63,11 @@
       color: green;
       display: none;
     }
-    .error {
+    .error-message {
       color: red;
+      text-align: center;
+      display: none;
+      margin-top: 20px;
     }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(30px); }
@@ -76,76 +79,46 @@
 
   <div class="form-container">
     <h2>فرم ثبت‌نام چرامی</h2>
+    <div class="error-message" id="alreadySubmitted">شما قبلاً ثبت‌نام کرده‌اید.</div>
 
-    <form id="registerForm" action="https://formsubmit.co/ajax/mhmdhaffi42@gmail.com" method="POST">
+    <form id="registerForm" action="https://formsubmit.co/mhmdhaffi42@gmail.com" method="POST">
       <label>نام کامل</label>
-      <input type="text" name="name" required>
+      <input type="text" name="نام کامل" required>
 
       <label>شماره تماس</label>
-      <input type="text" name="phone" required>
+      <input type="text" name="شماره تماس" required>
 
       <label>ایمیل</label>
-      <input type="email" name="email" required>
+      <input type="email" name="ایمیل" required>
 
       <label>چگونه با این پلتفرم آشنا شدید؟</label>
-      <textarea name="discovery" rows="3"></textarea>
+      <textarea name="آشنایی با پلتفرم" rows="3"></textarea>
 
+      <!-- Hidden fields -->
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_next" value="https://jafari786303.github.io/thanks.html">
 
       <button type="submit">ثبت‌نام</button>
     </form>
 
-    <div class="message" id="messageBox"></div>
+    <div class="message" id="successMessage">اطلاعات شما با موفقیت ارسال شد</div>
   </div>
 
   <script>
     const form = document.getElementById('registerForm');
-    const message = document.getElementById('messageBox');
+    const alreadySubmitted = document.getElementById('alreadySubmitted');
+    const successMessage = document.getElementById('successMessage');
 
-    if (localStorage.getItem("charami_submitted") === "true") {
+    // Check for cookie on load
+    if (document.cookie.includes("alreadyRegistered=true")) {
       form.style.display = "none";
-      message.textContent = "شما قبلاً فرم را پر کرده‌اید.";
-      message.classList.add("error");
-      message.style.display = "block";
+      alreadySubmitted.style.display = "block";
     }
 
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      if (localStorage.getItem("charami_submitted") === "true") {
-        message.textContent = "شما قبلاً فرم را پر کرده‌اید.";
-        message.classList.add("error");
-        message.style.display = "block";
-        return;
-      }
-
-      const formData = new FormData(form);
-
-      fetch(form.action, {
-        method: "POST",
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
-      }).then(response => {
-        if (response.ok) {
-          form.reset();
-          form.style.display = "none";
-          message.textContent = "اطلاعات شما با موفقیت ارسال شد";
-          message.classList.remove("error");
-          message.style.display = "block";
-          localStorage.setItem("charami_submitted", "true");
-        } else {
-          message.textContent = "ارسال ناموفق بود. لطفاً دوباره تلاش کنید.";
-          message.classList.add("error");
-          message.style.display = "block";
-        }
-      }).catch(error => {
-        message.textContent = "خطایی رخ داد. لطفاً اتصال اینترنت را بررسی کنید.";
-        message.classList.add("error");
-        message.style.display = "block";
-      });
+    // On submit, set cookie to prevent resubmission
+    form.addEventListener("submit", () => {
+      document.cookie = "alreadyRegistered=true; max-age=31536000"; // 1 year
     });
   </script>
 
