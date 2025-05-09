@@ -70,9 +70,9 @@
 </head>
 <body>
 
-  <div class="form-container" id="formBox">
+  <div class="form-container">
     <h2>فرم ثبت‌نام چرامی</h2>
-    <form id="registerForm" action="https://formsubmit.co/mhmdhaffi42@gmail.com" method="POST">
+    <form id="registerForm">
       <label>نام کامل</label>
       <input type="text" name="name" required>
 
@@ -85,10 +85,6 @@
       <label>چگونه با این پلتفرم آشنا شدید؟</label>
       <textarea name="discovery" rows="3"></textarea>
 
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_next" value="https://jafari786303.github.io/thanks.html">
-      
       <button type="submit">ثبت‌نام</button>
     </form>
     <div class="success" id="successMsg">فرم با موفقیت ارسال شد!</div>
@@ -96,19 +92,28 @@
 
   <script>
     const form = document.getElementById('registerForm');
-    const success = document.getElementById('successMsg');
-    const formBox = document.getElementById('formBox');
+    const successMsg = document.getElementById('successMsg');
 
-    // Check cookie
-    if (document.cookie.includes("submitted=true")) {
-      form.style.display = "none";
-      success.innerText = "شما قبلاً فرم را پر کرده‌اید.";
-      success.style.display = "block";
-    }
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault(); // Prevent default form submit
 
-    // After submit, set cookie
-    form.addEventListener('submit', function () {
-      document.cookie = "submitted=true; max-age=31536000"; // valid for 1 year
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch('https://formsubmit.co/ajax/mhmdhaffi42@gmail.com', {
+          method: 'POST',
+          body: formData,
+        });
+
+        if (response.ok) {
+          form.reset();
+          successMsg.style.display = 'block';
+        } else {
+          alert("ارسال فرم با مشکل مواجه شد. لطفاً دوباره تلاش کنید.");
+        }
+      } catch (error) {
+        alert("خطا در اتصال به سرور.");
+      }
     });
   </script>
 
