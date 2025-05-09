@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>با تشکر از ثبت‌نام</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: #f0f8ff;
+      font-family: 'Vazirmatn', sans-serif;
+      text-align: center;
+      padding: 100px 20px;
+    }
+    .box {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>با تشکر!</h2>
+    <p>ثبت‌نام شما با موفقیت انجام شد.</p>
+    <p>شما فقط یک بار می‌توانید فرم را پر کنید.</p>
+  </div>
+
+  <script>
+    // Set cookie here after successful redirect
+    document.cookie = "submitted=true; max-age=31536000";
+  </script>
+</body>
+</html>
