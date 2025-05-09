@@ -6,12 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn&display=swap" rel="stylesheet">
   <style>
-    * {
-      font-family: 'Vazirmatn', sans-serif;
-      box-sizing: border-box;
-    }
+    * { font-family: 'Vazirmatn', sans-serif; box-sizing: border-box; }
     body {
-      background: linear-gradient(120deg, #2196f3, #21cbf3);
+      background: url('https://i.ibb.co/Mx584fD/charami-bg.jpg') no-repeat center center fixed;
+      background-size: cover;
       min-height: 100vh;
       display: flex;
       align-items: center;
@@ -19,12 +17,12 @@
       padding: 40px;
     }
     .form-container {
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.95);
       border-radius: 15px;
       padding: 30px 40px;
       width: 100%;
       max-width: 500px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
       animation: fadeIn 1s ease-in-out;
     }
     h2 {
@@ -72,7 +70,7 @@
 </head>
 <body>
 
-  <div class="form-container">
+  <div class="form-container" id="formBox">
     <h2>فرم ثبت‌نام چرامی</h2>
     <form id="registerForm" action="https://formsubmit.co/mhmdhaffi42@gmail.com" method="POST">
       <label>نام کامل</label>
@@ -85,10 +83,12 @@
       <input type="email" name="email" required>
 
       <label>چگونه با این پلتفرم آشنا شدید؟</label>
-      <textarea name="discovery" rows="3" placeholder="مثلاً از طریق دوست، شبکه اجتماعی یا تبلیغات..."></textarea>
+      <textarea name="discovery" rows="3"></textarea>
 
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_next" value="https://jafari786303.github.io/thanks.html">
+      
       <button type="submit">ثبت‌نام</button>
     </form>
     <div class="success" id="successMsg">فرم با موفقیت ارسال شد!</div>
@@ -97,13 +97,20 @@
   <script>
     const form = document.getElementById('registerForm');
     const success = document.getElementById('successMsg');
+    const formBox = document.getElementById('formBox');
 
-    form.addEventListener('submit', function (e) {
-      setTimeout(() => {
-        success.style.display = 'block';
-      }, 1000); // Fake success message
+    // Check cookie
+    if (document.cookie.includes("submitted=true")) {
+      form.style.display = "none";
+      success.innerText = "شما قبلاً فرم را پر کرده‌اید.";
+      success.style.display = "block";
+    }
+
+    // After submit, set cookie
+    form.addEventListener('submit', function () {
+      document.cookie = "submitted=true; max-age=31536000"; // valid for 1 year
     });
   </script>
 
 </body>
-</html
+</html>
