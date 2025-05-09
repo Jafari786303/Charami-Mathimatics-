@@ -44,7 +44,7 @@
       font-size: 18px;
       margin-bottom: 25px;
     }
-    .register-btn {
+    .register-btn, .login-btn {
       background-color: #43a047;
       color: white;
       border: none;
@@ -54,8 +54,9 @@
       cursor: pointer;
       transition: background 0.3s, transform 0.3s;
       animation: bounceIn 1.5s ease-out;
+      margin: 10px;
     }
-    .register-btn:hover {
+    .register-btn:hover, .login-btn:hover {
       background-color: #388e3c;
       transform: scale(1.05);
     }
@@ -123,6 +124,9 @@
     </p>
     <button class="register-btn" onclick="window.location.href='register.html'">
       ثبت‌نام کنید و از حالا شروع کنید
+    </button>
+    <button class="login-btn" onclick="window.location.href='First.html'">
+      من قبلاً حساب دارم
     </button>
   </main>
   <div class="cookie-alert" id="cookieAlert">
