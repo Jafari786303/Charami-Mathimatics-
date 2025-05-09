@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>فرم ثبت</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn&display=swap" rel="stylesheet">
+  <style>
+    * {
+      font-family: 'Vazirmatn', sans-serif;
+      box-sizing: border-box;
+    }
+    body {
+      background: linear-gradient(120deg, #2196f3, #21cbf3);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+    }
+    .form-container {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 15px;
+      padding: 30px 40px;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      animation: fadeIn 1s ease-in-out;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #0d47a1;
+    }
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    button {
+      width: 100%;
+      padding: 14px;
+      background: #0d47a1;
+      color: white;
+      font-size: 17px;
+      border: none;
+      border-radius: 8px;
+      margin-top: 20px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #1565c0;
+    }
+    .success {
+      color: green;
+      text-align: center;
+      margin-top: 15px;
+      display: none;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>فرم ثبت‌</h2>
+    <form id="registerForm" action="https://formsubmit.co/mhmdhaffi42@gmail.com" method="POST">
+      <label>نام کامل</label>
+      <input type="text" name="name" required>
+
+      <label>ایمیل</label>
+      <input type="email" name="email" required>
+
+      <label>شماره تماس</label>
+      <input type="text" name="phone" required pattern="^\\d{10,15}$">
+
+      <label>توضیحات</label>
+      <textarea name="message" rows="3"></textarea>
+
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+      <button type="submit">ثبت‌نام</button>
+    </form>
+    <div class="success" id="successMsg">فرم با موفقیت ارسال شد!</div>
+  </div>
+
+  <script>
+    const form = document.getElementById('registerForm');
+    const success = document.getElementById('successMsg');
+
+    form.addEventListener('submit', function (e) {
+      setTimeout(() => {
+        success.style.display = 'block';
+      }, 1000); // Fake success message
+    });
+  </script>
+
+</body>
+</html>
