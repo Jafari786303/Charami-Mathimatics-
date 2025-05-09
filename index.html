@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
   <meta charset="UTF-8">
@@ -142,8 +143,7 @@
       document.getElementById('cookieAlert').style.display = 'none';
     }
     function declineCookies() {
-      document.getElementById('cookieAlert').style.display = 'none';
-      alert('شما شرایط را نپذیرفتید. ممکن است برخی امکانات غیرفعال شوند.');
+      window.location.href = 'deny.html'; // Redirect to deny.html on rejection
     }
   </script>
 </body>
