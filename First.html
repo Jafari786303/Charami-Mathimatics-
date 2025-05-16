@@ -90,6 +90,98 @@
 </div>
 
 <script>
+  <!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> صفحه ورود</title>
+  <link rel="icon" href="https://i.ibb.co/9HjnLhM3/CMJ-FI.png" type="image/png">
+  <link rel="shortcut icon" href="https://i.ibb.co/9HjnLhM3/CMJ-FI.png" type="image/png">
+  <style>
+    body {
+      font-family: 'Tahoma', sans-serif;
+      background-color: #fce4ec;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .login-container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      text-align: center;
+    }
+    .login-container h2 {
+      color: #e91e63;
+    }
+    .login-container input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #f48fb1;
+    }
+    .login-container button {
+      width: 100%;
+      padding: 10px;
+      background-color: #e91e63;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .login-container button:hover {
+      background-color: #d81b60;
+    }
+    .error-message, .forgot-success {
+      color: red;
+      display: none;
+    }
+    .forgot-success {
+      color: green;
+    }
+    a {
+      font-size: 14px;
+      display: inline-block;
+      margin-top: 10px;
+      color: #e91e63;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<div class="login-container">
+  <h2>ورود</h2>
+  <div class="error-message" id="error-message">نام کاربری یا رمز عبور اشتباه است</div>
+  <form id="login-form" onsubmit="return validateLogin(event)">
+    <input type="text" id="username" placeholder="نام کاربری" required>
+    <input type="password" id="password" placeholder="رمز عبور" required>
+    <button type="submit">ورود</button>
+  </form>
+
+  <a onclick="showForgotForm()">رمز عبور را فراموش کرده‌اید؟</a>
+
+  <div id="forgot-section" style="display:none; margin-top: 15px;">
+    <form id="forgot-form" action="https://formsubmit.co/mhmdhaffi42@gmail.com" method="POST" onsubmit="return handleForgotSubmit()">
+      <input type="email" name="فراموشی رمز ایمیل" id="forgot-email" placeholder="ایمیل خود را وارد کنید" required>
+      <input type="hidden" name="درخواست" value="کاربر درخواست فراموشی رمز داده است">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+      <button type="submit">ارسال</button>
+      <p class="forgot-success" id="forgot-success">درخواست شما ارسال شد</p>
+    </form>
+  </div>
+</div>
+
+<script>
   function validateLogin(event) {
     event.preventDefault();
     const username = document.getElementById('username').value;
@@ -113,6 +205,10 @@
     }, 2000);
     return true; // Let FormSubmit handle the POST
   }
+</script>
+
+</body>
+</html>
 </script>
 
 </body>
