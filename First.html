@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> صفحه ورود</title>
+  <title>صفحه ورود دوره پولی</title>
   <link rel="icon" href="https://i.ibb.co/9HjnLhM3/CMJ-FI.png" type="image/png">
-  <link rel="shortcut icon" href="https://i.ibb.co/9HjnLhM3/CMJ-FI.png" type="image/png">
   <style>
     body {
       font-family: 'Tahoma', sans-serif;
@@ -42,17 +41,17 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
-      transition: background-color 0.3s;
     }
     .login-container button:hover {
       background-color: #d81b60;
     }
-    .error-message, .forgot-success {
+    .error-message {
       color: red;
       display: none;
     }
-    .forgot-success {
+    .success-message {
       color: green;
+      display: none;
     }
     a {
       font-size: 14px;
@@ -69,6 +68,7 @@
 <div class="login-container">
   <h2>ورود</h2>
   <div class="error-message" id="error-message">نام کاربری یا رمز عبور اشتباه است</div>
+  <div class="success-message" id="success-message">ورود موفق!</div>
   <form id="login-form" onsubmit="return validateLogin(event)">
     <input type="text" id="username" placeholder="نام کاربری" required>
     <input type="password" id="password" placeholder="رمز عبور" required>
@@ -79,42 +79,59 @@
 
   <div id="forgot-section" style="display:none; margin-top: 15px;">
     <form id="forgot-form" action="https://formsubmit.co/mhmdhaffi42@gmail.com" method="POST" onsubmit="return handleForgotSubmit()">
-      <input type="email" name="فراموشی رمز ایمیل" id="forgot-email" placeholder="ایمیل خود را وارد کنید" required>
-      <input type="hidden" name="درخواست" value="کاربر درخواست فراموشی رمز داده است">
+      <input type="email" name="فراموشی رمز ایمیل" placeholder="ایمیل خود را وارد کنید" required>
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_template" value="table">
       <button type="submit">ارسال</button>
-      <p class="forgot-success" id="forgot-success">درخواست شما ارسال شد</p>
+      <p class="success-message">درخواست شما ارسال شد</p>
     </form>
   </div>
 </div>
 
 <script>
-  // چک کردن کوکی هنگام بارگذاری صفحه
+  // بررسی ورود قبلی و تلاش‌های قبلی (کوکی مخفی)
   window.onload = function () {
-    const attempt = getCookie("login_attempt");
-    if (attempt === "failed") {
-      alert("شما قبلاً با رمز اشتباه تلاش کرده‌اید. دسترسی شما محدود شده است.");
-      disableLoginForm();
-    } else if (attempt === "success") {
-      alert("شما قبلاً وارد شده‌اید.");
-      // window.location.href = 'Second.html'; // فعال‌سازی اگر می‌خواید مستقیم وارد بشه
+    const sessionId = getCookie("hidden_user_token");
+    const wrongAttempts = getCookie("wrong_attempts");
+
+    if (sessionId && wrongAttempts >= 3) {
+      console.log("ممکن است کاربر در تلاش برای دسترسی به حساب دیگر باشد.");
+      // اینجا می‌توانید در آینده این مورد را گزارش یا بررسی کنید
     }
   };
 
   function validateLogin(event) {
     event.preventDefault();
 
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const errorMessage = document.getElementById("error-message");
+    const successMessage = document.getElementById("success-message");
 
-    if (username === 'CharamiAdmin' && password === 'be786') {
-      setCookie("login_attempt", "success", 1);
-      window.location.href = 'Second.html';
+    // ثبت توکن مخفی برای پیگیری بعدی
+    let hiddenToken = getCookie("hidden_user_token");
+    if (!hiddenToken) {
+      hiddenToken = "UID_" + Math.random().toString(36).substring(2, 15);
+      setCookie("hidden_user_token", hiddenToken, 30);
+    }
+
+    if (username === "CharamiAdmin" && password === "be786") {
+      setCookie("login_status", "success", 1);
+      setCookie("user_id", username, 1);
+      successMessage.style.display = "block";
+      errorMessage.style.display = "none";
+      setTimeout(() => {
+        window.location.href = "Second.html";
+      }, 1000);
     } else {
-      document.getElementById('error-message').style.display = 'block';
-      setCookie("login_attempt", "failed", 1);
-      disableLoginForm();
+      let attempts = parseInt(getCookie("wrong_attempts") || "0");
+      attempts += 1;
+      setCookie("wrong_attempts", attempts, 7); // ذخیره برای ۷ روز
+      errorMessage.style.display = "block";
+      successMessage.style.display = "none";
+
+      console.warn(`شناسایی تلاش ناموفق شماره ${attempts} برای کاربر: ${username}`);
+      // اینجا می‌توانید در آینده لاگ تهیه کنید یا آلارم بفرستید
     }
   }
 
@@ -123,38 +140,28 @@
   }
 
   function handleForgotSubmit() {
-    document.getElementById('forgot-success').style.display = 'block';
     setTimeout(() => {
       document.getElementById('forgot-form').reset();
     }, 2000);
     return true;
   }
 
-  // ایجاد و گرفتن کوکی
+  // کوکی‌ها
   function setCookie(name, value, days) {
     const d = new Date();
-    d.setTime(d.getTime() + (days*24*60*60*1000));
-    const expires = "expires="+ d.toUTCString();
-    document.cookie = name + "=" + value + ";" + expires + ";path=/";
+    d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
+    document.cookie = name + "=" + value + ";expires=" + d.toUTCString() + ";path=/";
   }
 
   function getCookie(name) {
     const cname = name + "=";
-    const decodedCookie = decodeURIComponent(document.cookie);
-    const ca = decodedCookie.split(';');
-    for(let i = 0; i < ca.length; i++) {
+    const decoded = decodeURIComponent(document.cookie);
+    const ca = decoded.split(';');
+    for (let i = 0; i < ca.length; i++) {
       let c = ca[i].trim();
-      if (c.indexOf(cname) === 0) {
-        return c.substring(cname.length, c.length);
-      }
+      if (c.indexOf(cname) === 0) return c.substring(cname.length, c.length);
     }
     return "";
-  }
-
-  function disableLoginForm() {
-    document.getElementById("username").disabled = true;
-    document.getElementById("password").disabled = true;
-    document.querySelector("button[type='submit']").disabled = true;
   }
 </script>
 
