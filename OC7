@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>ثبت‌نام کلاس آنلاین</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Vazir', sans-serif;
+            background: linear-gradient(to bottom, #d7f0e7, #e6f3f9);
+            text-align: center;
+        }
+        header {
+            background-color: #2f7d32;
+            padding: 20px;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        form {
+            background-color: white;
+            display: inline-block;
+            margin-top: 50px;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        label {
+            display: block;
+            margin: 15px 0 5px;
+            font-weight: bold;
+        }
+        input, textarea {
+            width: 300px;
+            padding: 10px;
+            border: 1px solid #aaa;
+            border-radius: 10px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 30px;
+            background-color: #2f7d32;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .message {
+            color: green;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<header>ثبت نام برای کلاس ھای آنلاین </header>
+
+<form action="https://api.smartform.email/form/f4064729-0f16-4bd5-a7f1-3a95b2d3cdcc" method="POST">
+    <label for="name">شناسه (ID) شما چیست؟</label>
+    <input type="text" id="name" name="ID Name" required>
+
+    <label for="time">در چه زمان‌هایی می‌توانید در کلاس شرکت کنید؟</label>
+    <textarea id="time" name="Available Times" rows="4" required></textarea>
+
+    <input type="hidden" name="to" value="mhmdhaffi42@gmail.com">
+
+    <button type="submit" onclick="showMessage()">ارسال اطلاعات</button>
+    <div class="message" id="successMessage" style="display: none;">
+        اطلاعات شما با موفقیت برای معلم ارسال شد. پس از بررسی زمان‌های در دسترس، به شما اطلاع داده خواهد شد.
+    </div>
+</form>
+
+<script>
+    function showMessage() {
+        setTimeout(() => {
+            document.getElementById("successMessage").style.display = "block";
+        }, 500);
+    }
+</script>
+
+</body>
+</html>
