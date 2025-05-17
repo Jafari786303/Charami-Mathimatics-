@@ -55,7 +55,7 @@
 </head>
 <body>
 
-<header>ثبت نام برای کلاس ھای آنلاین </header>
+<header>ثبت‌نام کلاس‌های آنلاین</header>
 
 <form action="https://api.smartform.email/form/f4064729-0f16-4bd5-a7f1-3a95b2d3cdcc" method="POST">
     <label for="name">شناسه (ID) شما چیست؟</label>
