@@ -1,84 +1,115 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <title>ثبت‌نام کلاس آنلاین</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Vazir', sans-serif;
-            background: linear-gradient(to bottom, #d7f0e7, #e6f3f9);
-            text-align: center;
-        }
-        header {
-            background-color: #2f7d32;
-            padding: 20px;
-            color: white;
-            font-size: 24px;
-            font-weight: bold;
-        }
-        form {
-            background-color: white;
-            display: inline-block;
-            margin-top: 50px;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
-        }
-        label {
-            display: block;
-            margin: 15px 0 5px;
-            font-weight: bold;
-        }
-        input, textarea {
-            width: 300px;
-            padding: 10px;
-            border: 1px solid #aaa;
-            border-radius: 10px;
-        }
-        button {
-            margin-top: 20px;
-            padding: 10px 30px;
-            background-color: #2f7d32;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        .message {
-            color: green;
-            margin-top: 20px;
-            font-weight: bold;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>ثبت‌نام کلاس آنلاین</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn&display=swap" rel="stylesheet">
+  <style>
+    * { font-family: 'Vazirmatn', sans-serif; box-sizing: border-box; }
+    body {
+      background: linear-gradient(to bottom, #d7f0e7, #e6f3f9);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      text-align: center;
+    }
+    .form-container {
+      background: #fff;
+      border-radius: 15px;
+      padding: 30px 40px;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      margin-bottom: 20px;
+      color: #2f7d32;
+    }
+    label {
+      display: block;
+      margin: 15px 0 5px;
+      font-weight: bold;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    button {
+      width: 100%;
+      padding: 14px;
+      background: #2f7d32;
+      color: white;
+      font-size: 17px;
+      border: none;
+      border-radius: 8px;
+      margin-top: 20px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #388e3c;
+    }
+    .message {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 16px;
+      color: green;
+      display: none;
+    }
+    .error-message {
+      color: red;
+      text-align: center;
+      display: none;
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
 
-<header>ثبت‌نام کلاس‌های آنلاین</header>
+  <div class="form-container">
+    <h2>فرم ثبت‌نام کلاس آنلاین</h2>
+    <div class="error-message" id="alreadySubmitted">شما قبلاً ثبت‌نام کرده‌اید.</div>
 
-<form action="https://api.smartform.email/form/f4064729-0f16-4bd5-a7f1-3a95b2d3cdcc" method="POST">
-    <label for="name">شناسه (ID) شما چیست؟</label>
-    <input type="text" id="name" name="ID Name" required>
+    <form id="registerForm" action="https://formsubmit.co/mhmdhaffi42@gmail.com" method="POST">
+      <label for="idname">شناسه (ID) شما چیست؟</label>
+      <input type="text" id="idname" name="ID Name" required>
 
-    <label for="time">در چه زمان‌هایی می‌توانید در کلاس شرکت کنید؟</label>
-    <textarea id="time" name="Available Times" rows="4" required></textarea>
+      <label for="times">در چه زمان‌هایی می‌توانید در کلاس شرکت کنید؟</label>
+      <textarea id="times" name="Available Times" rows="4" required></textarea>
 
-    <input type="hidden" name="to" value="mhmdhaffi42@gmail.com">
+      <!-- Hidden fields -->
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_next" value="https://jafari786303.github.io/Thanks.html">
 
-    <button type="submit" onclick="showMessage()">ارسال اطلاعات</button>
-    <div class="message" id="successMessage" style="display: none;">
-        اطلاعات شما با موفقیت برای معلم ارسال شد. پس از بررسی زمان‌های در دسترس، به شما اطلاع داده خواهد شد.
-    </div>
-</form>
+      <button type="submit">ارسال اطلاعات</button>
+    </form>
 
-<script>
-    function showMessage() {
-        setTimeout(() => {
-            document.getElementById("successMessage").style.display = "block";
-        }, 500);
+    <div class="message" id="successMessage">اطلاعات شما با موفقیت ارسال شد.</div>
+  </div>
+
+  <script>
+    const form = document.getElementById('registerForm');
+    const alreadySubmitted = document.getElementById('alreadySubmitted');
+    const successMessage = document.getElementById('successMessage');
+
+    // اگر قبلاً ثبت‌نام کرده باشد
+    if (document.cookie.includes("alreadyRegistered=true")) {
+      form.style.display = "none";
+      alreadySubmitted.style.display = "block";
     }
-</script>
+
+    // بعد از ارسال فرم، کوکی ثبت‌نام تنظیم شود
+    form.addEventListener("submit", () => {
+      document.cookie = "alreadyRegistered=true; max-age=31536000"; // یک سال
+    });
+  </script>
 
 </body>
 </html>
