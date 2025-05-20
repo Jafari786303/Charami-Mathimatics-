@@ -2,127 +2,109 @@
 <html lang="fa" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>فرم ثبت‌نام چرامی</title>
+  <title>ثبت‌نام کلاس آنلاین</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn&display=swap" rel="stylesheet">
-  <link rel="icon" href="https://i.ibb.co/9HjnLhM3/CMJ-FI.png" type="image/png">
-  <link rel="shortcut icon" href="https://i.ibb.co/9HjnLhM3/CMJ-FI.png" type="image/png">
   <style>
-    * { font-family: 'Vazirmatn', sans-serif; box-sizing: border-box; }
     body {
-      background: url('https://i.ibb.co/Mx584fD/charami-bg.jpg') no-repeat center center fixed;
-      background-size: cover;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px;
+      margin: 0;
+      font-family: 'Vazirmatn', sans-serif;
+      background: linear-gradient(to bottom, #d7f0e7, #e6f3f9);
+      text-align: center;
+    }
+    header {
+      background-color: #2f7d32;
+      padding: 20px;
+      color: white;
+      font-size: 24px;
+      font-weight: bold;
     }
     .form-container {
-      background: rgba(255, 255, 255, 0.95);
+      background-color: white;
+      display: inline-block;
+      margin: 50px auto;
+      padding: 30px;
       border-radius: 15px;
-      padding: 30px 40px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      max-width: 450px;
       width: 100%;
-      max-width: 500px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-      animation: fadeIn 1s ease-in-out;
-    }
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
-      color: #0d47a1;
     }
     label {
       display: block;
-      margin: 10px 0 5px;
+      margin: 15px 0 5px;
+      font-weight: bold;
     }
     input, textarea {
       width: 100%;
-      padding: 12px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 16px;
+      padding: 10px;
+      border: 1px solid #aaa;
+      border-radius: 10px;
     }
     button {
-      width: 100%;
-      padding: 14px;
-      background: #0d47a1;
-      color: white;
-      font-size: 17px;
-      border: none;
-      border-radius: 8px;
       margin-top: 20px;
+      padding: 10px 30px;
+      background-color: #2f7d32;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
       cursor: pointer;
-      transition: background 0.3s;
-    }
-    button:hover {
-      background: #1565c0;
     }
     .message {
-      text-align: center;
-      margin-top: 20px;
-      font-size: 16px;
       color: green;
+      margin-top: 20px;
+      font-weight: bold;
       display: none;
     }
     .error-message {
       color: red;
-      text-align: center;
-      display: none;
       margin-top: 20px;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+      display: none;
     }
   </style>
 </head>
 <body>
 
-  <div class="form-container">
-    <h2>فرم ثبت‌نام چرامی</h2>
-    <div class="error-message" id="alreadySubmitted">شما قبلاً ثبت‌نام کرده‌اید.</div>
+<header>ثبت‌نام کلاس‌های آنلاین</header>
 
-    <form id="registerForm" action="https://formsubmit.co/mhmdhaffi42@gmail.com" method="POST">
-      <label>نام کامل</label>
-      <input type="text" name="نام کامل" required>
+<div class="form-container">
+  <div class="error-message" id="alreadySubmitted">شما قبلاً ثبت‌نام کرده‌اید.</div>
 
-      <label>شماره تماس</label>
-      <input type="text" name="شماره تماس" required>
+  <form id="classForm" action="https://formsubmit.co/mhmdhaffi42@gmail.com" method="POST">
+    <label for="name">شناسه (ID) شما چیست؟</label>
+    <input type="text" id="name" name="شناسه کاربر" required>
 
-      <label>ایمیل</label>
-      <input type="email" name="ایمیل" required>
+    <label for="time">در چه زمان‌هایی می‌توانید در کلاس شرکت کنید؟</label>
+    <textarea id="time" name="زمان‌های در دسترس" rows="4" required></textarea>
 
-      <label>چگونه با این پلتفرم آشنا شدید؟</label>
-      <textarea name="آشنایی با پلتفرم" rows="3"></textarea>
+    <!-- Hidden fields -->
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_next" value="https://jafari786303.github.io/Thanks.html">
 
-      <!-- Hidden fields -->
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_next" value="https://jafari786303.github.io/Thanks.html">
+    <button type="submit">ارسال اطلاعات</button>
+  </form>
 
-      <button type="submit">ثبت‌نام</button>
-    </form>
-
-    <div class="message" id="successMessage">اطلاعات شما با موفقیت ارسال شد</div>
+  <div class="message" id="successMessage">
+    اطلاعات شما با موفقیت برای معلم ارسال شد. پس از بررسی زمان‌های در دسترس، به شما اطلاع داده خواهد شد.
   </div>
+</div>
 
-  <script>
-    const form = document.getElementById('registerForm');
-    const alreadySubmitted = document.getElementById('alreadySubmitted');
-    const successMessage = document.getElementById('successMessage');
+<script>
+  const form = document.getElementById('classForm');
+  const successMessage = document.getElementById('successMessage');
+  const alreadySubmitted = document.getElementById('alreadySubmitted');
 
-    // Check for cookie on load
-    if (document.cookie.includes("alreadyRegistered=true")) {
-      form.style.display = "none";
-      alreadySubmitted.style.display = "block";
-    }
+  if (document.cookie.includes("alreadyClassRegistered=true")) {
+    form.style.display = "none";
+    alreadySubmitted.style.display = "block";
+  }
 
-    // On submit, set cookie to prevent resubmission
-    form.addEventListener("submit", () => {
-      document.cookie = "alreadyRegistered=true; max-age=31536000"; // 1 year
-    });
-  </script>
+  form.addEventListener("submit", () => {
+    document.cookie = "alreadyClassRegistered=true; max-age=31536000"; // یک سال
+    successMessage.style.display = "block";
+  });
+</script>
 
 </body>
 </html>
