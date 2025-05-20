@@ -62,19 +62,12 @@
       color: green;
       display: none;
     }
-    .error-message {
-      color: red;
-      text-align: center;
-      display: none;
-      margin-top: 20px;
-    }
   </style>
 </head>
 <body>
 
   <div class="form-container">
     <h2>فرم ثبت‌نام کلاس آنلاین</h2>
-    <div class="error-message" id="alreadySubmitted">شما قبلاً ثبت‌نام کرده‌اید.</div>
 
     <form id="registerForm" action="https://formsubmit.co/mhmdhaffi42@gmail.com" method="POST">
       <label for="idname">شناسه (ID) شما چیست؟</label>
@@ -86,30 +79,11 @@
       <!-- Hidden fields -->
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_next" value="https://jafari786303.github.io/Thanks.html">
+      <input type="hidden" name="_next" value="https://jafari786303.github.io/Thanks.html"><br><br>
 
       <button type="submit">ارسال اطلاعات</button>
     </form>
-
-    <div class="message" id="successMessage">اطلاعات شما با موفقیت ارسال شد.</div>
   </div>
-
-  <script>
-    const form = document.getElementById('registerForm');
-    const alreadySubmitted = document.getElementById('alreadySubmitted');
-    const successMessage = document.getElementById('successMessage');
-
-    // اگر قبلاً ثبت‌نام کرده باشد
-    if (document.cookie.includes("alreadyRegistered=true")) {
-      form.style.display = "none";
-      alreadySubmitted.style.display = "block";
-    }
-
-    // بعد از ارسال فرم، کوکی ثبت‌نام تنظیم شود
-    form.addEventListener("submit", () => {
-      document.cookie = "alreadyRegistered=true; max-age=31536000"; // یک سال
-    });
-  </script>
 
 </body>
 </html>
