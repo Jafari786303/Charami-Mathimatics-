@@ -71,11 +71,17 @@
   <div class="error-message" id="alreadySubmitted">شما قبلاً ثبت‌نام کرده‌اید.</div>
 
   <form id="classForm" action="https://formsubmit.co/mhmdhaffi42@gmail.com" method="POST">
-    <label for="name">شناسه (ID) شما چیست؟</label>
-    <input type="text" id="name" name="شناسه کاربر" required>
+    <label for="fullName">نام و نام خانوادگی</label>
+    <input type="text" id="fullName" name="نام و نام خانوادگی" required>
 
-    <label for="time">در چه زمان‌هایی می‌توانید در کلاس شرکت کنید؟</label>
-    <textarea id="time" name="زمان‌های در دسترس" rows="4" required></textarea>
+    <label for="phone">شماره تماس</label>
+    <input type="tel" id="phone" name="شماره تماس" required>
+
+    <label for="email">آدرس ایمیل</label>
+    <input type="email" id="email" name="آدرس ایمیل" required>
+
+    <label for="referral">چگونه با پلتفرم ما آشنا شدید؟</label>
+    <textarea id="referral" name="نحوه آشنایی" rows="4" required></textarea>
 
     <!-- Hidden fields -->
     <input type="hidden" name="_captcha" value="false">
@@ -86,7 +92,7 @@
   </form>
 
   <div class="message" id="successMessage">
-    اطلاعات شما با موفقیت برای معلم ارسال شد. پس از بررسی زمان‌های در دسترس، به شما اطلاع داده خواهد شد.
+    اطلاعات شما با موفقیت برای معلم ارسال شد. پس از بررسی، با شما تماس گرفته خواهد شد.
   </div>
 </div>
 
